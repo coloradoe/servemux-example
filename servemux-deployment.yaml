@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: servemux
+  labels:
+    app: servemux
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: servemux
+  template:
+    metadata:
+      labels:
+        app: servemux
+    spec:
+      containers:
+      - name: servemux
+        image: docker.io/rxdperez/testrepo:servemuxv1
+        ports:
+        - containerPort: 8086
+---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  labels:
+#    app: servemux
+#  name: servemux
+#  namespace: default
+#spec:
+#  ports:
+#    - name: http
+#      port: 80
+#      protocol: TCP
+#      targetPort: 8060
+#  selector:
+#    app: servemux
+#  type: ClusterIP
